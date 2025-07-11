@@ -1,11 +1,6 @@
 # Copyright (c) HashiCorp, Inc.
 # SPDX-License-Identifier: MPL-2.0
 
-provider "google" {
-  project = var.project_id
-  region  = var.region
-}
-
 resource "random_pet" "bucket_name" {
   prefix = "stacks"
   length = 2
