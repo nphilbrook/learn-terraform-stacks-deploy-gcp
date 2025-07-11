@@ -12,7 +12,7 @@ component "storage" {
   }
 
   providers = {
-    google    = provider.google.configurations[each.value]
+    google   = provider.google.configurations[each.value]
     random   = provider.random.this
   }
 }
