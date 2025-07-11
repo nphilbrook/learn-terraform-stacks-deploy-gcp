@@ -11,6 +11,7 @@ variable "project_id" {
 
 variable "identity_token" {
   type        = string
+  ephemeral   = true
   description = "JWT identity token"
 }
 
