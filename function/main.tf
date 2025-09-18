@@ -28,6 +28,8 @@ resource "google_storage_bucket_object" "function_zip" {
   name   = "hello-world.zip"
   bucket = var.storage_bucket_name
   source = local_file.function_zip.filename
+
+  depends_on = [data.local_file.function_zip]
 }
 
 resource "google_cloudfunctions2_function" "function" {
