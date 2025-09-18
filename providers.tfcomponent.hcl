@@ -4,7 +4,7 @@
 required_providers {
   google = {
     source  = "hashicorp/google"
-    version = "~> 7.3"
+    version = "~> 5.43"
   }
   archive = {
     source  = "hashicorp/archive"
