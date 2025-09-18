@@ -32,5 +32,6 @@ component "function" {
     google  = provider.google.configurations[each.value]
     archive = provider.archive.this
     random  = provider.random.this
+    local   = provider.local.this
   }
 }
