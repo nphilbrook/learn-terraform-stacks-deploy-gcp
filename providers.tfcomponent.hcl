@@ -4,7 +4,7 @@
 required_providers {
   google = {
     source  = "hashicorp/google"
-    version = ">= 5.0"
+    version = "~> 5.0"
   }
   archive = {
     source  = "hashicorp/archive"
@@ -13,6 +13,10 @@ required_providers {
   random = {
     source  = "hashicorp/random"
     version = "~> 3.7"
+  }
+  local = {
+    source  = "hashicorp/local"
+    version = "~> 2.5"
   }
 }
 
@@ -33,3 +37,4 @@ provider "google" "configurations" {
 
 provider "random" "this" {}
 provider "archive" "this" {}
+provider "local" "this" {}
