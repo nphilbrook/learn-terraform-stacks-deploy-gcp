@@ -6,6 +6,10 @@ resource "random_pet" "function_name" {
   length = 2
 }
 
+data "local_file" "function_zip" {
+  filename = data.archive_file.function_zip.output_path
+}
+
 data "archive_file" "function_zip" {
   type        = "zip"
   source_dir  = "${path.module}/hello-world"
@@ -13,9 +17,9 @@ data "archive_file" "function_zip" {
 }
 
 resource "google_storage_bucket_object" "function_zip" {
-  name   = "hello-world.zip"
-  bucket = var.storage_bucket_name
-  source = data.archive_file.function_zip.output_path
+  name    = "hello-world.zip"
+  bucket  = var.storage_bucket_name
+  content = data.local_file.function_zip.content_base64
 }
 
 resource "google_cloudfunctions2_function" "function" {
