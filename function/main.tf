@@ -30,7 +30,7 @@ resource "google_storage_bucket_object" "function_zip" {
   source = local_file.function_zip.filename
   detect_md5hash = data.local_file.function_zip.content_md5
 
-  depends_on = [data.local_file.function_zip]
+#  depends_on = [data.local_file.function_zip]
 }
 
 resource "google_cloudfunctions2_function" "function" {
