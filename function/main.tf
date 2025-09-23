@@ -28,7 +28,8 @@ resource "google_storage_bucket_object" "function_zip" {
   name           = "hello-world.zip"
   bucket         = var.storage_bucket_name
   source         = local_file.function_zip.filename
-  detect_md5hash = base64encode(local_file.function_zip.content_md5)
+  # detect_md5hash = base64encode(local_file.function_zip.content_md5)
+  detect_md5hash = local_file.function_zip.content_md5
 }
 
 resource "google_cloudfunctions2_function" "function" {
@@ -68,6 +69,7 @@ resource "google_cloudfunctions2_function" "function" {
 #   -H "Content-Type: application/json" \
 #   -d '{"name":"World"}' \
 #   https://${google_cloudfunctions2_function.function.location}-${google_cloudfunctions2_function.function.project}.cloudfunctions.net/${google_cloudfunctions2_function.function.name}
+# This may not work based on your orginaziton's policies. 
 
 # Grant permission on the underlying Cloud Run service
 resource "google_cloud_run_service_iam_member" "invoker" {
