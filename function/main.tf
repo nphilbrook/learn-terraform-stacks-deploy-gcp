@@ -63,11 +63,13 @@ resource "google_cloudfunctions2_function" "function" {
 #   --data='{"name":"World"}' \
 #   --gen2
 #
-# Or via HTTP with auth:
-# gcloud auth print-access-token | xargs -I {} curl -H "Authorization: Bearer {}" \
+# Or via HTTP with auth (use the function URL, not the Cloud Run service URL):
+# curl -H "Authorization: Bearer $(gcloud auth print-access-token)" \
 #   -H "Content-Type: application/json" \
 #   -d '{"name":"World"}' \
-#   ${google_cloudfunctions2_function.function.service_config[0].uri}
+#   https://${google_cloudfunctions2_function.function.location}-${google_cloudfunctions2_function.function.project}.cloudfunctions.net/${google_cloudfunctions2_function.function.name}
+
+# Grant permission on the underlying Cloud Run service
 resource "google_cloud_run_service_iam_member" "invoker" {
   count    = var.function_invoker_principal != null ? 1 : 0
   project  = google_cloudfunctions2_function.function.project
@@ -75,4 +77,14 @@ resource "google_cloud_run_service_iam_member" "invoker" {
   service  = google_cloudfunctions2_function.function.name
   role     = "roles/run.invoker"
   member   = var.function_invoker_principal
+}
+
+# Grant permission on the Cloud Function itself (for HTTP trigger access)
+resource "google_cloudfunctions2_function_iam_member" "invoker" {
+  count          = var.function_invoker_principal != null ? 1 : 0
+  project        = google_cloudfunctions2_function.function.project
+  location       = google_cloudfunctions2_function.function.location
+  cloud_function = google_cloudfunctions2_function.function.name
+  role           = "roles/cloudfunctions.invoker"
+  member         = var.function_invoker_principal
 }
