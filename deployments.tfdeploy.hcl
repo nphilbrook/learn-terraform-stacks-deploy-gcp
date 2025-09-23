@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: MPL-2.0
 
 identity_token "gcp" {
-  audience = ["hcp.workload.identity"]
+  audience = ["//iam.googleapis.com/projects/1037354265927/locations/global/workloadIdentityPools/terraform/providers/hcp-terraform"]
 }
 
 deployment "development" {
