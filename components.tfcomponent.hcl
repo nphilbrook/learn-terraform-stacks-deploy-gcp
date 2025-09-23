@@ -23,9 +23,10 @@ component "function" {
   source = "./function"
 
   inputs = {
-    region              = each.value
-    project_id          = var.project_id
-    storage_bucket_name = component.storage[each.value].storage_bucket_name
+    region                     = each.value
+    project_id                 = var.project_id
+    storage_bucket_name        = component.storage[each.value].storage_bucket_name
+    function_invoker_principal = var.function_invoker_principal
   }
 
   providers = {

@@ -24,3 +24,9 @@ variable "service_account_email" {
   type        = string
   description = "Service account email"
 }
+
+variable "function_invoker_principal" {
+  type        = string
+  default     = null
+  description = "GCP IAM principal (user, service account, or group) that can invoke the function. Format: user:email@domain.com, serviceAccount:sa@project.iam.gserviceaccount.com, or group:group@domain.com"
+}

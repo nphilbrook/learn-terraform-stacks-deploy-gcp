@@ -56,11 +56,23 @@ resource "google_cloudfunctions2_function" "function" {
   }
 }
 
-# Allow unauthenticated invocation of the function via Cloud Run (CF v2 backend)
-resource "google_cloud_run_service_iam_member" "invoker" {
-  project  = google_cloudfunctions2_function.function.project
-  location = google_cloudfunctions2_function.function.location
-  service  = google_cloudfunctions2_function.function.name
-  role     = "roles/run.invoker"
-  member   = "allUsers"
+# Allow authenticated invocation of the function
+# To invoke the function via gcloud:
+# gcloud functions call ${google_cloudfunctions2_function.function.name} \
+#   --region=${google_cloudfunctions2_function.function.location} \
+#   --data='{"name":"World"}' \
+#   --gen2
+#
+# Or via HTTP with auth:
+# gcloud auth print-access-token | xargs -I {} curl -H "Authorization: Bearer {}" \
+#   -H "Content-Type: application/json" \
+#   -d '{"name":"World"}' \
+#   ${google_cloudfunctions2_function.function.service_config[0].uri}
+resource "google_cloudfunctions2_function_iam_member" "invoker" {
+  count          = var.function_invoker_principal != null ? 1 : 0
+  project        = google_cloudfunctions2_function.function.project
+  location       = google_cloudfunctions2_function.function.location
+  cloud_function = google_cloudfunctions2_function.function.name
+  role           = "roles/run.invoker"
+  member         = var.function_invoker_principal
 }
