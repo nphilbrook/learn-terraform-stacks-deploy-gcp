@@ -1,11 +1,5 @@
-module.exports = async function (context, req) {
-	const name = req.query.name || (req.body && req.body.name) || "World";
-
-	context.res = {
-		status: 200,
-		headers: {
-			"Content-Type": "text/plain"
-		},
-		body: `Hello, ${name}!`
-	};
+exports.helloWorld = (req, res) => {
+  const name = req.query.name || req.body?.name || "World";
+  
+  res.status(200).send(`Hello, ${name}!`);
 };
