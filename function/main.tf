@@ -55,3 +55,12 @@ resource "google_cloudfunctions2_function" "function" {
     max_instance_count = 1
   }
 }
+
+# Allow unauthenticated invocation of the function
+resource "google_cloudfunctions2_function_iam_member" "invoker" {
+  project        = google_cloudfunctions2_function.function.project
+  location       = google_cloudfunctions2_function.function.location
+  cloud_function = google_cloudfunctions2_function.function.name
+  role           = "roles/cloudfunctions.invoker"
+  member         = "allUsers"
+}
