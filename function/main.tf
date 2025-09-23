@@ -68,11 +68,11 @@ resource "google_cloudfunctions2_function" "function" {
 #   -H "Content-Type: application/json" \
 #   -d '{"name":"World"}' \
 #   ${google_cloudfunctions2_function.function.service_config[0].uri}
-resource "google_cloudfunctions2_function_iam_member" "invoker" {
-  count          = var.function_invoker_principal != null ? 1 : 0
-  project        = google_cloudfunctions2_function.function.project
-  location       = google_cloudfunctions2_function.function.location
-  cloud_function = google_cloudfunctions2_function.function.name
-  role           = "roles/run.invoker"
-  member         = var.function_invoker_principal
+resource "google_cloud_run_service_iam_member" "invoker" {
+  count    = var.function_invoker_principal != null ? 1 : 0
+  project  = google_cloudfunctions2_function.function.project
+  location = google_cloudfunctions2_function.function.location
+  service  = google_cloudfunctions2_function.function.name
+  role     = "roles/run.invoker"
+  member   = var.function_invoker_principal
 }
