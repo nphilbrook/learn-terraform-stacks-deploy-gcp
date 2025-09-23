@@ -56,11 +56,11 @@ resource "google_cloudfunctions2_function" "function" {
   }
 }
 
-# Allow unauthenticated invocation of the function
-resource "google_cloudfunctions2_function_iam_member" "invoker" {
-  project        = google_cloudfunctions2_function.function.project
-  location       = google_cloudfunctions2_function.function.location
-  cloud_function = google_cloudfunctions2_function.function.name
-  role           = "roles/cloudfunctions.invoker"
-  member         = "allUsers"
+# Allow unauthenticated invocation of the function via Cloud Run (CF v2 backend)
+resource "google_cloud_run_service_iam_member" "invoker" {
+  project  = google_cloudfunctions2_function.function.project
+  location = google_cloudfunctions2_function.function.location
+  service  = google_cloudfunctions2_function.function.name
+  role     = "roles/run.invoker"
+  member   = "allUsers"
 }
