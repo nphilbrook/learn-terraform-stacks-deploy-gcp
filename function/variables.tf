@@ -3,12 +3,12 @@
 
 variable "region" {
   description = "GCP region."
-  type = string
+  type        = string
 }
 
 variable "project_id" {
   description = "GCP project ID."
-  type = string
+  type        = string
 }
 
 variable "storage_bucket_name" {

@@ -28,10 +28,10 @@ provider "google" "configurations" {
     region  = each.value
 
     external_credentials {
-      audience = var.audience
+      audience              = var.audience
       service_account_email = var.service_account_email
-      identity_token = var.identity_token
-    }    
+      identity_token        = var.identity_token
+    }
   }
 }
 

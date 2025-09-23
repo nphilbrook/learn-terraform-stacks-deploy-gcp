@@ -12,8 +12,8 @@ component "storage" {
   }
 
   providers = {
-    google   = provider.google.configurations[each.value]
-    random   = provider.random.this
+    google = provider.google.configurations[each.value]
+    random = provider.random.this
   }
 }
 
@@ -23,8 +23,8 @@ component "function" {
   source = "./function"
 
   inputs = {
-    region     = each.value
-    project_id = var.project_id  
+    region              = each.value
+    project_id          = var.project_id
     storage_bucket_name = component.storage[each.value].storage_bucket_name
   }
 
