@@ -39,7 +39,7 @@ resource "google_cloudfunctions2_function" "function" {
   description = "Hello World Function"
 
   build_config {
-    runtime     = "nodejs18"
+    runtime     = "nodejs22"
     entry_point = "helloWorld"
 
     source {
