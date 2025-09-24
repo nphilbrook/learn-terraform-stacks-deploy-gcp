@@ -28,8 +28,7 @@ resource "google_storage_bucket_object" "function_zip" {
   name           = "hello-world.zip"
   bucket         = var.storage_bucket_name
   source         = local_file.function_zip.filename
-  # detect_md5hash = base64encode(local_file.function_zip.content_md5)
-  detect_md5hash = local_file.function_zip.content_md5
+  # detect_md5hash = local_file.function_zip.content_md5
 }
 
 resource "google_cloudfunctions2_function" "function" {
