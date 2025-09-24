@@ -16,7 +16,7 @@ deployment "development" {
 
     regions = ["us-central1"]
   }
-  # destroy = true
+  destroy = true
 }
 
 deployment "production" {
@@ -30,5 +30,5 @@ deployment "production" {
 
     regions = ["us-central1", "us-west1"]
   }
-  # destroy = true
+  destroy = true
 }
