@@ -9,11 +9,11 @@ variable "project_id" {
   type = string
 }
 
-variable "identity_token" {
-  type        = string
-  ephemeral   = true
-  description = "JWT identity token"
-}
+# variable "identity_token" {
+#   type        = string
+#   ephemeral   = true
+#   description = "JWT identity token"
+# }
 
 variable "audience" {
   type        = string
