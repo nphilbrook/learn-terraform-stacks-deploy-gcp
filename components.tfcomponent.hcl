@@ -23,16 +23,17 @@ component "function" {
   source = "./function"
 
   inputs = {
-    region                     = each.value
-    project_id                 = var.project_id
+    region     = each.value
+    project_id = var.project_id
     # storage_bucket_name        = component.storage[each.value].storage_bucket_name
     function_invoker_principal = var.function_invoker_principal
   }
 
   providers = {
     # google  = provider.google.configurations[each.value]
-    archive = provider.archive.this
-    random  = provider.random.this
-    local   = provider.local.this
+    archive     = provider.archive.this
+    random      = provider.random.this
+    local       = provider.local.this
+    environment = provider.environment.this
   }
 }

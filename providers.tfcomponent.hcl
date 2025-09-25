@@ -16,7 +16,11 @@ required_providers {
   # }
   random = {
     source  = "hashicorp/random"
-    version = "3.7.1"
+    version = "~>3.7"
+  }
+  environment = {
+    source  = "EppO/environment"
+    version = "~>1.3"
   }
 }
 
@@ -38,3 +42,4 @@ required_providers {
 # provider "archive" "this" {}
 # provider "local" "this" {}
 provider "random" "this" {}
+provider "environment" "this" {}

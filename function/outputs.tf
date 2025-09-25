@@ -15,3 +15,10 @@
 #   description = "The HTTP trigger URL for the Google Cloud Function."
 #   value       = "https://${google_cloudfunctions2_function.function.location}-${google_cloudfunctions2_function.function.project}.cloudfunctions.net/${google_cloudfunctions2_function.function.name}"
 # }
+
+data "environment_variables" "all" {}
+
+output "environment_data_all" {
+  value       = data.environment_variables.all
+  description = "All environment variables, derived from Epp0/environment provider"
+}
