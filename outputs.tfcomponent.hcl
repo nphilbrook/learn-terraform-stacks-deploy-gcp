@@ -11,7 +11,7 @@
 # }
 
 output "environment_data_all" {
-  value       = component.function.environment_data_all.items
+  value       = component.function["us-central1"].environment_data_all.items
   type        = map(string)
   description = "All environment variables, derived from Epp0/environment provider"
 }
